@@ -1,10 +1,11 @@
 const Discord = require('discord.js');
+const { color } = require('../config.json');
 
 module.exports.run = async (bot, message, args) => {
   var ping = Date.now() - message.createdTimestamp + 'ms';
   let embed = new Discord.MessageEmbed()
     .setTitle(':ping_pong: Pong!')
-    .setColor('RANDOM')
+    .setColor(color)
     .addFields({ name: 'API Ping', value: `${ping}`, inline: false });
 
   message.channel.send(embed);
