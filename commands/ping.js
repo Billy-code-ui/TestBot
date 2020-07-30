@@ -6,7 +6,8 @@ module.exports.run = async (bot, message, args) => {
   let embed = new Discord.MessageEmbed()
     .setTitle(':ping_pong: Pong!')
     .setColor(color)
-    .addFields({ name: 'API Ping', value: `${ping}`, inline: false });
+    .addFields({ name: 'Discord Ping', value: `${ping}`, inline: false })
+    .addFields({ name: 'API Ping', value: `${bot.ws.ping}ms`, inline: false })
 
   message.channel.send(embed);
 };

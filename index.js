@@ -30,6 +30,7 @@ fs.readdir('./commands/', (err, files) => {
     bot.commands.set(pull.config.name, pull);
     pull.config.aliases.forEach((alias) => {
       bot.aliases.set(alias, pull.config.name);
+      console.log(`${f} loaded!`)
     });
   });
 });
