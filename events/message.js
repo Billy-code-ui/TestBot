@@ -1,18 +1,38 @@
 const Discord = require('discord.js');
 const config = require('../config.json');
 const fs = require('fs');
+const mongoose = require('mongoose');
+
+require('dotenv').config();
 
 module.exports = (bot, message) => {
 
-    let prefixes = JSON.parse(fs.readFileSync('./prefixes.json', "utf8"));
-    if (!prefixes[message.guild.id]) {
-        prefixes[message.guild.id] = {
-            prefixes: config.prefix
-        };
-    }
+    mongoose.connect(process.env.mongoPass, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    })
+    const prefix = '-';
 
-    let prefix = prefixes[message.guild.id].prefixes
+    /*const prefixes = require('../models/prefixes.js');
+    prefixes.findOne(
+        {
+            guildID: message.guild.id
+        },
+        (err, prefix) => {
+            if (err) console.log(err)
+            if (!prefix) {
+                const newPrefix = new prefixes({
+                    guildID: message.guild.id,
+                    Prefix: '-',
+                });
+                newPrefix.save.save().catch((err) => console.log(err));
+            } else {
+                let prefix = prefix.Prefix
 
+                }
+        }
+    );
+    */
     if (message.author.bot || message.channel.type === "dm") return;
 
     let messageArray = message.content.split(" ")

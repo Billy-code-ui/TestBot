@@ -3,6 +3,8 @@ const errors = require('../util/errors.js');
 const { color } = require('../config.json');
 const mongoose = require('mongoose');
 
+require('dotenv').config();
+
 module.exports.run = async (bot, message, args) => {
   mongoose.connect(process.env.mongoPass, {
     useNewUrlParser: true,
@@ -10,6 +12,8 @@ module.exports.run = async (bot, message, args) => {
   });
 
   if (!message.member.hasPermisison("MANAGE_GUILD")) return errors.noPerms(message, "MANAGE_GUILD");
+
+  return message.channel.send(`This command is currently down!`);
 
   const prefixes = require('../models/prefixes.js');
 
