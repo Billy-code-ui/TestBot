@@ -7,13 +7,12 @@ require('dotenv').config();
 
 module.exports = (bot, message) => {
 
-    mongoose.connect(process.env.mongoPass, {
+    /*mongoose.connect(process.env.mongoPass, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     })
-    const prefix = '-';
 
-    /*const prefixes = require('../models/prefixes.js');
+    const prefixes = require('../models/prefixes.js');
     prefixes.findOne(
         {
             guildID: message.guild.id
@@ -33,6 +32,9 @@ module.exports = (bot, message) => {
         }
     );
     */
+
+    const prefix = '-';
+
     if (message.author.bot || message.channel.type === "dm") return;
 
     let messageArray = message.content.split(" ")

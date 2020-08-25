@@ -11,7 +11,7 @@ module.exports.run = async (bot, message, args) => {
     useUnifiedTopology: true,
   });
 
-  if (!message.member.hasPermisison("MANAGE_GUILD")) return errors.noPerms(message, "MANAGE_GUILD");
+  if (!message.member.hasPermission("MANAGE_GUILD")) return errors.noPerms(message, "MANAGE_GUILD");
 
   return message.channel.send(`This command is currently down!`);
 
