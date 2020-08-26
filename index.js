@@ -31,8 +31,9 @@ fs.readdir('./commands/', (err, files) => {
 		pull.config.aliases.forEach(alias => {
 			bot.aliases.set(alias, pull.config.name);
 		});
-		console.log(`${f} loaded!`);
+		//console.log(`${f} loaded!`)
 	});
+	console.log(`${jsfile.length} commands loaded!`);
 });
 
 bot.login(process.env.TOKEN);

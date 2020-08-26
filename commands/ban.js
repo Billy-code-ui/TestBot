@@ -10,7 +10,7 @@ module.exports.run = async (bot, message, args) => {
   );
   if (!bUser)
     return message.channel.send('Please mention a user in the server!');
-  if (bUser.hasPermission('ADMINISTRATOR'))
+  if (!bUser.bannable)
     return message.channel.send("That person can't be banned!");
   if (!bReason) bReason = 'None Provided';
   message.guild.member(bUser).ban(bReason);

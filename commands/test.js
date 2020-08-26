@@ -1,10 +1,12 @@
 const Discord = require('discord.js');
-const errors = require('../util/errors.js');
-const { color } = require('../config.json');
+const errors = require('../../util/errors.js');
+const { color } = require('../../config.json');
 
 module.exports.run = async (bot, message, args) => {
-  message.channel.send("|| <@&728745798698926160> ||")
+  message.channel.send(`Working!`)
 }
+
+
 module.exports.config = {
   name: 'test',
   aliases: [],
