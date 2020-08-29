@@ -1,39 +1,8 @@
 const { bot } = require('../index');
-
-const Discord = require('discord.js');
 const { prefix, owneronlymode } = require('../config.json');
-const fs = require('fs');
-const mongoose = require('mongoose');
-
 require('dotenv').config();
 
 bot.on('message', async (message) => {
-
-    /*mongoose.connect(process.env.mongoPass, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-
-    const prefixes = require('../models/prefixes.js');
-    prefixes.findOne(
-        {
-            guildID: message.guild.id
-        },
-        (err, prefix) => {
-            if (err) console.log(err)
-            if (!prefix) {
-                const newPrefix = new prefixes({
-                    guildID: message.guild.id,
-                    Prefix: '-',
-                });
-                newPrefix.save.save().catch((err) => console.log(err));
-            } else {
-                let prefix = prefix.Prefix
-
-                }
-        }
-    );
-    */
 
     if (message.author.bot || message.channel.type === "dm") return;
 
