@@ -1,3 +1,5 @@
+const { bot } = require('../index');
+
 const Discord = require('discord.js');
 const config = require('../config.json');
 const fs = require('fs');
@@ -5,7 +7,7 @@ const mongoose = require('mongoose');
 
 require('dotenv').config();
 
-module.exports = (bot, message) => {
+bot.on('message', async (message) => {
 
     /*mongoose.connect(process.env.mongoPass, {
         useNewUrlParser: true,
@@ -48,4 +50,4 @@ module.exports = (bot, message) => {
     if (!message.content.startsWith(prefix)) return;
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
     if (commandfile) commandfile.run(bot, message, args)
-}
+})
