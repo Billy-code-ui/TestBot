@@ -1,7 +1,7 @@
 const { bot } = require('../index');
 
 const Discord = require('discord.js');
-const config = require('../config.json');
+const { prefix, owneronlymode } = require('../config.json');
 const fs = require('fs');
 const mongoose = require('mongoose');
 
@@ -35,8 +35,6 @@ bot.on('message', async (message) => {
     );
     */
 
-    const prefix = '-';
-
     if (message.author.bot || message.channel.type === "dm") return;
 
     let messageArray = message.content.split(" ")
@@ -49,5 +47,8 @@ bot.on('message', async (message) => {
 
     if (!message.content.startsWith(prefix)) return;
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
-    if (commandfile) commandfile.run(bot, message, args)
+    if (commandfile) {
+        if (owneronlymode === "true" && message.author.id !== '317074864538386443') return message.channel.send(`The bot is currently in owner only mode.`)
+        commandfile.run(bot, message, args)
+    }
 })
