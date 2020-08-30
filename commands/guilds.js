@@ -1,8 +1,17 @@
 const Discord = require('discord.js');
+const { color } = require('../config.json');
 
 module.exports.run = async (bot, message, args) => {
-    let total = bot.guilds.cache.size
 
+    let guilds = bot.guilds.cache.map(guild => guild.name);
+
+    let embed = new Discord.MessageEmbed()
+        .setTitle('Guilds')
+        .setDescription(guilds)
+        .setColor(color)
+        .setFooter(`${bot.user.username} is in ${bot.guilds.cache.size} guilds!`)
+
+    message.channel.send(embed)
 }
 
 
