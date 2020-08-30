@@ -1,7 +1,6 @@
 const fs = require("fs");
 
 module.exports = (bot) => {
-
     fs.readdir("./events/", (err, files) => {
         let jsfiles = files.filter(f => f.split(".").pop() === "js");
         console.log(`${jsfiles.length} events loaded!`);
