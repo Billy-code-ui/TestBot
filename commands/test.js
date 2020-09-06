@@ -1,32 +1,38 @@
 const Discord = require('discord.js');
 const { color } = require('../config.json');
 const errors = require('../util/errors.js');
+const axios = require('axios');
+const puppeteer = require('puppeteer');
 
 module.exports.run = async (bot, message, args) => {
     if (message.author.id !== '317074864538386443') return errors.noPerms(message, 'ID: 317074864538386443');
 
-    if (!message.member.hasPermission("ADMINISTRATOR")) return errors.noPerms(message, 'ADMINISTRATOR')
+    let thingtosearch = args.splice(1).join(' ')
+    if (!thingtosearch) return message.channel.send(`Please give me something to search!`)
 
-    const filter = m => m.author.id === message.author.id;
+    let embed = new Discord.MessageEmbed()
+        .setTitle('Searching...')
+        .setColor(color)
 
-    message.channel.send(`Number guessing game started...\n**${message.member.user.tag}** is currently choosing a number!`)
-    const msg = await message.member.send(`Hey there! Which number would you like?`)
+    const a = await message.channel.send(embed)
 
-    msg.channel.awaitMessages(filter, { max: 1 }).then(async collected => {
-        msg.channel.send(`Game started!`);
+    const browser = await puppeteer.launch({
+        headless: false
+    });
 
-        message.channel.send(`**Game started. Start guessing!**`)
+    const page = await browser.newPage()
 
-        const filter2 = m => m.content.includes(collected.first().content)
+    await page.goto(`https://www.google.com/search?q=${thingtosearch}`, { waitUntil: "networkidle2" })
 
-        message.channel.awaitMessages(filter2, { time: 60000, errors: ['time'] }).then(async message => {
-            if (message.content === collected.first().content) {
-                return message.channel.send(`**${message.member.user.tag}** has guessed the correct number!`)
-            } else {
-                message.channel.send(`${message.author} incorrect.`)
-            }
-        })
-    })
+    await page.screenshot({ path: screenshot })
+
+    await browser.close()
+
+    console.log("ss:" + screenshot)
+    //await embed.setTitle('')
+    //await embed.setImage(ss.b)
+
+    //await a.edit(embed)
 }
 
 
