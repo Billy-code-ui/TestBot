@@ -1,18 +1,8 @@
 const Discord = require('discord.js');
-const errors = require('../util/errors.js');
-const { color } = require('../config.json');
-const config = require('../config.json')
+const { prefix, color } = require('../config.json');
 const fs = require('fs');
 
 module.exports.run = async (bot, message, args) => {
-  let prefixes = JSON.parse(fs.readFileSync('./prefixes.json', "utf8"));
-  if (!prefixes[message.guild.id]) {
-    prefixes[message.guild.id] = {
-      prefixes: config.prefix
-    };
-  }
-
-  let prefix = prefixes[message.guild.id].prefixes
   let helpArray = message.content.split(" ");
   let helpArgs = helpArray.slice(1);
 

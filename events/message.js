@@ -1,5 +1,6 @@
 const { bot } = require('../index');
 const { prefix, owneronlymode } = require('../config.json');
+
 require('dotenv').config();
 
 bot.on('message', async (message) => {
