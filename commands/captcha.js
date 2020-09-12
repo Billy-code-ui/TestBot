@@ -48,7 +48,7 @@ module.exports.run = async (bot, message, args) => {
     const msg = await message.member.send(final)
 
     msg.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] }).then(async collected => {
-        if (collected.first().content == captcha) {
+        if (collected.first().content === captcha) {
             msg.channel.send(`Successfully Verified!`)
             await a.edit('Successfully Verified!')
         } else {
