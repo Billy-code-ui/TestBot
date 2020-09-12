@@ -9,10 +9,21 @@ function createCaptcha(length) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
-}
+};
 
 module.exports.run = async (bot, message, args) => {
+
     const a = await message.channel.send('Loading...')
+    message.delete()
+
+    const verificationSuccessful = async () => {
+        //What to do if they are an actual human
+        /*
+        Example: 
+        let role = message.guild.roles.cache.find(r => r.name === 'Verified');
+        message.member.roles.add(role)
+        */
+    };
 
     let captchaLength = 8
     let captcha = createCaptcha(captchaLength)
@@ -49,17 +60,18 @@ module.exports.run = async (bot, message, args) => {
 
     const msg = await message.member.send(final)
 
-    msg.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] }).then(async collected => {
+    msg.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] }).then(collected => {
         if (collected.first().content === captcha) {
             msg.channel.send(`Successfully Verified!`)
-            await a.edit('Successfully Verified!')
+            a.edit('Successfully Verified!').then(a => a.delete({ timeout: 5000 }))
+            verificationSuccessful()
         } else {
             msg.channel.send(`Incorrect code. Try again later!`)
-            await a.edit('Failed to verify.')
+            a.edit('Failed to verify.').then(a => a.delete({ timeout: 5000 }))
         }
-    }).catch(async () => {
+    }).catch(() => {
         msg.channel.send(`Did not send anything within 30 seconds. Out of time.`)
-        await a.edit(`Did not respond within the 30 second time limit!`)
+        a.edit(`Did not respond within the 30 second time limit!`).then(a => a.delete({ timeout: 5000 }))
     })
 };
 
