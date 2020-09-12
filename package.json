@@ -12,6 +12,7 @@
 	"license": "ISC",
 	"dependencies": {
 		"axios": "^0.20.0",
+		"canvas": "^2.6.1",
 		"discord.js": "^12.2.0",
 		"dotenv": "^8.2.0",
 		"giphy-random": "^2.0.8",
