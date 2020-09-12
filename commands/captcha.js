@@ -12,6 +12,8 @@ function createCaptcha(length) {
 }
 
 module.exports.run = async (bot, message, args) => {
+    const a = await message.channel.send('Loading...')
+
     let captchaLength = 8
     let captcha = createCaptcha(captchaLength)
 
@@ -43,7 +45,7 @@ module.exports.run = async (bot, message, args) => {
     const final = new Discord.MessageAttachment(canvas.toBuffer(), "captcha.png");
     const filter = m => m.author.id === message.author.id;
 
-    const a = await message.channel.send(`Verifying...`);
+    await a.edit(`Verifying...`);
 
     const msg = await message.member.send(final)
 
