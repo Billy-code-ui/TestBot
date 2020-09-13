@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const errors = require('../util/errors.js');
-const { color } = require('../config.json');
+const { color, prefix } = require('../config.json');
 
 module.exports.run = async (bot, message, args) => {
 
