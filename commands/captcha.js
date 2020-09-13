@@ -13,8 +13,8 @@ function createCaptcha(length) {
 
 module.exports.run = async (bot, message, args) => {
 
-    const a = await message.channel.send('Loading...')
     message.delete()
+    const a = await message.channel.send('Loading...')
 
     const verificationSuccessful = async () => {
         //What to do if they are an actual human
