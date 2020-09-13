@@ -56,8 +56,8 @@ module.exports.run = async (bot, message, args) => {
     const final = new Discord.MessageAttachment(canvas.toBuffer(), "captcha.png");
     const filter = m => m.author.id === message.author.id;
 
-    const msg = await message.member.send(final)
     await a.edit(`Verifying...`);
+    const msg = await message.member.send(final)
 
     msg.channel.awaitMessages(filter, { max: 1, time: 30000, errors: ['time'] }).then(collected => {
         if (collected.first().content === captcha) {
