@@ -3,13 +3,13 @@ const bot = new Client();
 
 require('dotenv').config();
 
-require('./handlers')(bot)
+require('./handlers')(bot);
 
 bot.commands = new Collection();
 bot.aliases = new Collection();
 
 module.exports = {
-	bot: bot
+	bot: bot,
 };
 
 bot.login(process.env.TOKEN);

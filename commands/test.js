@@ -7,7 +7,6 @@ module.exports.run = async (bot, message, args) => {
     if (message.author.id !== '317074864538386443') return errors.noPerms(message, 'ID: 317074864538386443');
 }
 
-
 module.exports.config = {
     name: 'test',
     aliases: [],
