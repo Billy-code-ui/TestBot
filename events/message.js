@@ -4,7 +4,6 @@ const { prefix, owneronlymode } = require('../config.json');
 require('dotenv').config();
 
 bot.on('message', async (message) => {
-
     if (message.author.bot || message.channel.type === "dm") return;
 
     let messageArray = message.content.split(" ")
